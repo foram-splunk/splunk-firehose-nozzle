@@ -98,6 +98,7 @@ This is recommended for dev environments only.
 * `STATUS_MONITOR_INTERVAL`: Time interval (in s/m/h. For example, 3600s or 60m or 1h) for Enabling Monitoring(Metric data of insights with in the connectors). Default is 0s (Disabled).
 * `SPLUNK_METRIC_INDEX`: Index in which metric data will be ingested when monitoring module is enabled
 * `SELECTED_MONITORING_METRICS`: Name of the metrics that you want to monitor and add using comma seprated values. List of the metrics that are supported in the metrics modules are given below
+* `SPLUNK_LOGGING_INDEX`: The Splunk index where logs from the nozzle of the sourcetype `cf:splunknozzle` will be sent to. Warning: Setting an invalid index will cause events to be lost. This index must match one of the selected indexes for the Splunk HTTP event collector token used for the SPLUNK_TOKEN parameter. When not provided, all logging events will be forwarded to the default SPLUNK_INDEX. The default value is `""`	
 
 
 

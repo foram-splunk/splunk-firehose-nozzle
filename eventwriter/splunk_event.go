@@ -53,10 +53,12 @@ func (s *SplunkEvent) Write(events []map[string]interface{}) (error, uint64) {
 	count := uint64(len(events))
 	for i, event := range events {
 
-		if event["event"].(map[string]interface{})["info_splunk_index"] != nil {
-			event["index"] = event["event"].(map[string]interface{})["info_splunk_index"]
-		} else if s.config.Index != "" {
-			event["index"] = s.config.Index
+		if _, ok := event["index"]; !ok {
+			if event["event"].(map[string]interface{})["info_splunk_index"] != nil {
+				event["index"] = event["event"].(map[string]interface{})["info_splunk_index"]
+			} else if s.config.Index != "" {
+				event["index"] = s.config.Index
+			}
 		}
 
 		if len(s.config.Fields) > 0 {
